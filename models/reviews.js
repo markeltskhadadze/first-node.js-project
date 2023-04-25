@@ -1,21 +1,16 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../utils/database')
+const {Schema, model} = require('mongoose')
 
-const reviews = sequelize.define('Reviews', {
-  id: {
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-    type: Sequelize.INTEGER
-  },
+const reviews = new Schema({
   fullName: {
-    type: Sequelize.STRING,
+    type: String,
+    required: true,
     allowNull: false
   },
   reviewText: {
-    type: Sequelize.STRING,
+    type: String,
+    required: true,
     allowNull: false
   }
 })
 
-module.exports = reviews
+module.exports = model('Reviews', reviews)
