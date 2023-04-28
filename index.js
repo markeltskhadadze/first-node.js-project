@@ -1,29 +1,32 @@
 const express = require('express')
-// const path = require('path')
-const sequelize = require('./utils/database')
 const reviewsRouter = require('./routes/reviews')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3000
+const mongoose = require('mongoose')
 
-// app.use(express.static(path.join(__dirname, 'public')))
-app.use('/api/reviews', reviewsRouter)
-app.use(express.json())
+require('dotenv').config()
+const { MONGODB } = process.env
 
-app.use(cors())
-app.use(bodyParser.json())
+// app.get('/reviews', function(req, res) {
 
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Behold The MEVN Stack!'
-    });
-});
+//   db.collection('reviews').find().toArray(function (err, docs) {
+//     if(err) {
+//       console.log(err)
+//       return res.sendStatus(500)
+//     }
+//       res.send(docs)
+//     })
+// })  
 
 async function start() {
   try {
-    await sequelize.sync()
-    app.listen(PORT)
+    const url = `mongodb+srv://markeltskhadadze:71DutibA@cluster0.7f89tqp.mongodb.net/node-project`
+    await mongoose.connect(url)
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
   } catch (e) {
     console.log(e)
   }
