@@ -1,5 +1,5 @@
 const express = require('express')
-const reviewsRouter = require('./routes/reviews')
+const reviews = require('./routes/reviews')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -9,27 +9,20 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const { MONGODB } = process.env
 
-// app.get('/reviews', function(req, res) {
+mongoose.connect(MONGODB);
+const database = mongoose.connection
 
-//   db.collection('reviews').find().toArray(function (err, docs) {
-//     if(err) {
-//       console.log(err)
-//       return res.sendStatus(500)
-//     }
-//       res.send(docs)
-//     })
-// })  
+database.on('error', (error) => {
+  console.log(error)
+})
 
-async function start() {
-  try {
-    const url = `mongodb+srv://markeltskhadadze:71DutibA@cluster0.7f89tqp.mongodb.net/node-project`
-    await mongoose.connect(url)
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`)
-    })
-  } catch (e) {
-    console.log(e)
-  }
-}
+database.once('connected', () => {
+  console.log('Database Connected');
+})
 
-start()
+app.use(express.json());
+app.use('/api', reviews)
+
+app.listen(3000, () => {
+    console.log(`Server Started at ${PORT}`)
+})

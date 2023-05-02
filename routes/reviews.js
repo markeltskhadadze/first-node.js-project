@@ -1,23 +1,22 @@
-const {Router} = require('express')
-const Reviews = require('../models/reviews')
-const router = Router()
+const express = require('express')
+const router = express.Router()
+const Reviews = require('../models/reviews');
 
-router.get('/', async function(req, res) {
-  const reviews = await Reviews.find()
+router.get('/reviews', async (req, res) => {
+  try{
+      const data = await Reviews.find();
+      res.json(data)
+  }
+  catch(error){
+      res.status(500).json({message: error.message})
+  }
 })
 
-router.post('/add', async (req, res) => {
-  const reviews = new Reviews({
-    fullName: req.body.fullName,
-    reviewText: req.body.reviewText
+router.post('/add-reviews', (req, res) => {
+  const data = new Reviews({
+    fullName: req.body.name,
+    reviewText: req.body.age
   })
-
-  try {
-    await course.save()
-    res.redirect('/courses')
-  } catch (e) {
-    console.log(e)
-  }
 })
 
 module.exports = router
