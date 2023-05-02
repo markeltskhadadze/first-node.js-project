@@ -18,6 +18,10 @@ database.once('connected', () => {
   console.log('Database Connected');
 })
 
+app.get('/', (req,res) => {
+  res.send({ title: 'Books' });
+})
+
 app.use(express.json());
 app.use('/api', reviews)
 
