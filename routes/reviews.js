@@ -12,11 +12,13 @@ router.get('/reviews', async (req, res) => {
   }
 })
 
-router.post('/add-reviews', (req, res) => {
-  const data = new Reviews({
-    fullName: req.body.name,
-    reviewText: req.body.age
-  })
+router.post('/add-reviews', async (req, res) => {
+  const data = new Reviews(req.body)
+  try {
+    await data.save() 
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 module.exports = router
