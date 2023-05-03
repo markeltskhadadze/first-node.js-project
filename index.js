@@ -1,5 +1,7 @@
 const express = require('express')
 const reviews = require('./routes/reviews')
+const users = require('./routes/users')
+const posts = require('./routes/posts')
 const app = express()
 const cors = require('cors')
 const PORT = process.env.PORT || 3000
@@ -26,6 +28,8 @@ app.get('/', (req,res) => {
 app.use(cors())
 app.use(express.json());
 app.use('/api', reviews)
+app.use('/api', users)
+app.use('/api', posts)
 
 app.listen(3000, () => {
     console.log(`Server Started at ${PORT}`)
