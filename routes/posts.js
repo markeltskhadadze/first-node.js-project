@@ -12,4 +12,13 @@ router.get('/posts', async (req, res) => {
   }
 })
 
+router.post('/add-post', async (req, res) => {
+  const data = new Posts(req.body)
+  try {
+    await data.save() 
+  } catch (e) {
+    console.log(e)
+  }
+})
+
 module.exports = router
