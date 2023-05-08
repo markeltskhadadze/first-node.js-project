@@ -68,4 +68,12 @@ router.get('/profile', auth, async (req, res) => {
   }
 })
 
+router.post('/update/:id', auth,  async (req, res) => {
+  try {
+    await Users.findByIdAndUpdate(req.body._id, req.body)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
 module.exports = router
