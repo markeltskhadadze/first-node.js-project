@@ -6,7 +6,7 @@ const auth = require('../middleware/auth')
 
 router.get('/users', auth, async (req, res) => {
   try{
-    const data = await Users.find();
+    const data = await Users.find()
     res.json(data)
   }
   catch(error){
@@ -26,7 +26,6 @@ router.post('/add-user', auth, async (req, res) => {
 router.post('/login', async (req, res) => {
   const name = req.body.name
   const password = req.body.password
-  console.log(name)
   try {    
     if (!(name && password)) {
       res.status(400).json("All input is required")
@@ -43,7 +42,7 @@ router.post('/login', async (req, res) => {
       );
 
       user.token = token
-
+      
       res.status(200).json(user)
     }
     res.status(400).send("Invalid Credentials")
