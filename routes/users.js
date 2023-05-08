@@ -59,4 +59,13 @@ router.post('/remove', auth,  async (req, res) => {
   }
 })
 
+router.get('/profile', auth, async (req, res) => {
+  try {
+    const data = await Users.findById(req.user.user_id)
+    res.json(data)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 module.exports = router
