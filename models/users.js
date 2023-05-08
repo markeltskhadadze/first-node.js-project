@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model } = require('mongoose')
 
 const users = new Schema({
   name: {
@@ -15,7 +15,14 @@ const users = new Schema({
   },
   token: { 
     type: String 
-  }
+  },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Posts',
+      required: true
+    }
+  ]
 })
 
 module.exports = model('Users', users)
