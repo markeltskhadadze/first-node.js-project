@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
     if (!(name && password)) {
       res.status(400).json("All input is required")
     }
-    const user = await Users.findOne({ name })
+    const user = await Users.findOne({ name, password })
 
     if (user) {
       const token = jwt.sign(
