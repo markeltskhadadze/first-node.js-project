@@ -4,7 +4,7 @@ const Reviews = require('../models/reviews')
 
 router.get('/reviews', async (req, res) => {
   try{
-      const data = await Reviews.find();
+      const data = await Reviews.find()
       res.json(data)
   }
   catch(error){
