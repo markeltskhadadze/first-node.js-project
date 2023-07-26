@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Reviews = require('../models/reviews')
+const auth = require("../middleware/auth")
 
 router.get('/reviews', async (req, res) => {
   try{
@@ -15,10 +16,18 @@ router.get('/reviews', async (req, res) => {
 router.post('/add-reviews', async (req, res) => {
   const data = new Reviews(req.body)
   try {
-    await data.save() 
+    await data.save()
   } catch (e) {
     console.log(e)
   }
+})
+
+router.post('/remove-review', auth,  async (req, res) => {
+    try {
+        await Reviews.deleteOne({_id: req.body._id})
+    } catch (e) {
+        console.log(e)
+    }
 })
 
 module.exports = router
