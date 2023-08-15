@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const Services = require('../models/services')
-router.get('/services', async (req, res) => {
+const ProjectInfo = require('../models/project-info')
+router.get('/project-info', async (req, res) => {
     try{
-        const data = await Services.find()
+        const data = await ProjectInfo.find()
         res.json(data)
     }
     catch(error){

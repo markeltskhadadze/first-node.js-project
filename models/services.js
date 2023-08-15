@@ -3,11 +3,11 @@ const {Schema, model } = require('mongoose')
 const services = new Schema({
     title: {
         type: String,
-        required: true,
+        required: true
     },
     description: {
         type: String,
-        required: true,
+        required: true
     }
 })
 
