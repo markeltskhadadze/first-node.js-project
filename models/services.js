@@ -8,6 +8,10 @@ const services = new Schema({
     description: {
         type: String,
         required: true
+    },
+    link: {
+        type: String,
+        required: true
     }
 })
 
