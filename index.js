@@ -4,6 +4,8 @@ const services = require('./routes/services')
 const users = require('./routes/users')
 const posts = require('./routes/posts')
 const projects = require('./routes/project-info')
+const category = require('./routes/category')
+const business = require('./routes/business')
 const app = express()
 const cors = require('cors')
 const PORT = process.env.PORT || 3000
@@ -66,6 +68,8 @@ app.use('/api', users)
 app.use('/api', posts)
 app.use('/api', services)
 app.use('/api', projects)
+app.use('/api', category)
+app.use('/api', business)
 
 app.listen(PORT, () => {
     console.log(`Server Started at ${PORT}`)
