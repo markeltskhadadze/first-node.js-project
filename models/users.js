@@ -9,7 +9,7 @@ const users = new Schema({
     type: String,
     required: true,
   },
-  role: {
+  user_type: {
     type: String,
     required: true,
   },
