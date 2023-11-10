@@ -22,6 +22,13 @@ const users = new Schema({
       ref: 'Posts',
       required: true
     }
+  ],
+  business: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Business',
+      required: true
+    }
   ]
 })
 
