@@ -13,7 +13,6 @@ const mongoose = require('mongoose')
 const Grid = require("gridfs-stream")
 const nodemailer = require('nodemailer')
 
-app.use(cors())
 let gfs
 
 require('dotenv').config()
@@ -62,6 +61,7 @@ app.post('/api/send-phone', async (req, res) => {
     }
 })
 
+app.use(cors())
 app.use(express.json())
 app.use('/api', reviews)
 app.use('/api', users)

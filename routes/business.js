@@ -5,7 +5,6 @@ const Users = require('../models/users')
 const auth = require('../middleware/auth')
 
 router.get('/business', async (req, res) => {
-    console.log(req.user.user_id)
     try{
         const data = await Business.find()
         res.json(data)
