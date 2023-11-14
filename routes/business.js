@@ -16,12 +16,11 @@ router.get('/business', async (req, res) => {
 
 router.get('/user-business', auth, async (req, res) => {
     const userId = req.user.user_id
-    try{
-        const data = await Business.find({ user_id: userId })
+    try {
+        const data = await Business.find({author: userId})
         res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
 })
 
@@ -39,6 +38,16 @@ router.post('/add-business', auth, async (req, res) => {
       await currentUser.save()
     } catch (e) {
       console.log(e)
+    }
+})
+
+router.get('/business/:id', async (req, res) => {
+    const businessId = req.params.id
+    try {
+        const data = await Business.find({_id: businessId})
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
 })
 
