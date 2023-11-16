@@ -1,13 +1,27 @@
 const {Schema, model} = require('mongoose')
 
 const reviews = new Schema({
-  fullName: {
+  assigned_rating: {
     type: String,
-    required: true,
+    required: true
   },
-  reviewText: {
+  created_at: {
     type: String,
-    required: true,
+    required: true
+  },
+  text: {
+    type: String,
+    required: true
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true
+  },
+  business: {
+    type: Schema.Types.ObjectId,
+    ref: 'Business',
+    required: true
   }
 })
 
