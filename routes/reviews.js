@@ -5,6 +5,16 @@ const auth = require("../middleware/auth")
 const Users = require("../models/users")
 const Business = require('../models/business')
 
+router.get('/reviews', auth, async (req, res) => {
+    const currentUser = req.user.user_id
+    try{
+        const data = await Reviews.find({ user: currentUser })
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
 router.get('/reviews/:id', async (req, res) => {
     const businessId = req.params.id
     try{
