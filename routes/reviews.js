@@ -8,7 +8,7 @@ const Business = require('../models/business')
 router.get('/reviews', auth, async (req, res) => {
     const currentUser = req.user.user_id
     try{
-        const data = await Reviews.find({ user: currentUser })
+        const data = await Reviews.find({ user: currentUser }).populate('business')
         res.json(data)
     }
     catch(error){
