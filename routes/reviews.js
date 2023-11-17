@@ -47,8 +47,7 @@ router.post('/add-reviews', auth, async (req, res) => {
         console.log(e)
         res.status(500).send("Failed to add review")
     }
-});
-
+})
 
 router.put('/review/:id', auth,  async (req, res) => {
     try {
@@ -61,8 +60,10 @@ router.put('/review/:id', auth,  async (req, res) => {
 router.delete('/review/:id', auth,  async (req, res) => {
     try {
         await Reviews.deleteOne({_id: req.params.id})
+        res.status(200).send("Review deleted successfully")
     } catch (e) {
         console.log(e)
+        res.status(500).send("Failed to delete review")
     }
 })
 
