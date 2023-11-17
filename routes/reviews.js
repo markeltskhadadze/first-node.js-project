@@ -52,8 +52,10 @@ router.post('/add-reviews', auth, async (req, res) => {
 router.put('/review/:id', auth,  async (req, res) => {
     try {
         await Reviews.findByIdAndUpdate(req.params.id, req.body)
+        res.status(200).send("Review updated successfully")
     } catch (e) {
         console.log(e)
+        res.status(500).send("Failed to delete review")
     }
 })
 
