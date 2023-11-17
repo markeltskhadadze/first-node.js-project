@@ -18,7 +18,7 @@ router.get('/reviews', auth, async (req, res) => {
 router.get('/reviews/:id', async (req, res) => {
     const businessId = req.params.id
     try{
-      const data = await Reviews.find({ business: businessId })
+      const data = await Reviews.find({ business: businessId }).populate('user')
       res.json(data)
   }
   catch(error){
@@ -42,7 +42,7 @@ router.post('/add-reviews', auth, async (req, res) => {
             business: currentBusinessId
         })
         await data.save()
-        res.status(200).send("Review added successfully")
+        res.status(200).send(data)
     } catch (e) {
         console.log(e)
         res.status(500).send("Failed to add review")
