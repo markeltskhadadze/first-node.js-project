@@ -27,22 +27,28 @@ router.get('/reviews/:id', async (req, res) => {
 })
 
 router.post('/add-reviews', auth, async (req, res) => {
-    const currentUser = await Users.findById(req.user.user_id)
-    const currentBusinessId = await Business.findById(req.body.businessId)
-    const { assigned_rating, created_at, text } = req.body
-    const data = new Reviews({
-        assigned_rating,
-        created_at,
-        text,
-        user: currentUser,
-        business: currentBusinessId
-    })
     try {
+        const [currentUser, currentBusinessId] = await Promise.all([
+            Users.findById(req.user.user_id),
+            Business.findById(req.body.businessId)
+        ])
+
+        const { assigned_rating, created_at, text } = req.body
+        const data = new Reviews({
+            assigned_rating,
+            created_at,
+            text,
+            user: currentUser,
+            business: currentBusinessId
+        })
         await data.save()
+        res.status(200).send("Review added successfully")
     } catch (e) {
         console.log(e)
+        res.status(500).send("Failed to add review")
     }
-})
+});
+
 
 router.put('/review/:id', auth,  async (req, res) => {
     try {
