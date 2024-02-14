@@ -6,9 +6,11 @@ const posts = require('./routes/posts')
 const projects = require('./routes/project-info')
 const category = require('./routes/category')
 const business = require('./routes/business')
+const events = require('./routes/events')
+const tasks = require('./routes/tasks')
 const app = express()
 const cors = require('cors')
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 const mongoose = require('mongoose')
 const Grid = require("gridfs-stream")
 const nodemailer = require('nodemailer')
@@ -70,6 +72,8 @@ app.use('/api', services)
 app.use('/api', projects)
 app.use('/api', category)
 app.use('/api', business)
+app.use('/api', events)
+app.use('/api', tasks)
 
 app.listen(PORT, () => {
     console.log(`Server Started at ${PORT}`)
